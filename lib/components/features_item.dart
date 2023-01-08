@@ -1,7 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../data/model/new.dart';
+
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({Key? key}) : super(key: key);
+  const FeaturedItem({Key? key, required this.featuredNew}) : super(key: key);
+  final New featuredNew;
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +18,35 @@ class FeaturedItem extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               SizedBox(
                   height: 400,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    child: Image(
-                      image: AssetImage("images/new_image.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  )),
-              SizedBox(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      child: CachedNetworkImage(
+                          imageUrl: featuredNew.media.first.url,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator(),),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover))),
+              const SizedBox(
                 height: 8,
               ),
               Text(
-                "Lorem ipsum",
-                style: TextStyle(
+                featuredNew.title,
+                style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 24),
                 textAlign: TextAlign.left,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(
-                "Lorem ipsum sit dolor",
-                style: TextStyle(color: Colors.grey, fontSize: 18),
+                featuredNew.abstract,
+                style: const TextStyle(color: Colors.grey, fontSize: 18),
                 textAlign: TextAlign.left,
               )
             ],

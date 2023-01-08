@@ -9,12 +9,12 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
-        NewItem(),
-        NewItem(),
-        NewItem(),
-        NewItem(),
-        NewItem(),
-        NewItem(),
+        // NewItem(),
+        // NewItem(),
+        // NewItem(),
+        // NewItem(),
+        // NewItem(),
+        // NewItem(),
       ],
     );
   }
